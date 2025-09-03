@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Homework 2 Extra Credit - Currency Converter for June 2024 exchange rates">
+  <title>HW2 Extra Credit</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 6px 10px;
+      text-align: left;
+    }
+
+    td input[type="text"] {
+      width: 80px;
+      text-align: right;
+    }
+
+    #usdInput:focus {
+      background-color: #ffffcc;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 2: Extra Credit ~ Currency Converter</h2>
+
+  <table>
+    <tr>
+      <th>Currency</th>
+      <th>Rate</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Euro</td>
+      <td>0.92</td>
+      <td><input type="text" id="euroValue" readonly></td>
+    </tr>
+    <tr>
+      <td>Canadian Dollar</td>
+      <td>1.38</td>
+      <td><input type="text" id="cadValue" readonly></td>
+    </tr>
+    <tr>
+      <td>Hong Kong Dollar</td>
+      <td>7.81</td>
+      <td><input type="text" id="hkdValue" readonly></td>
+    </tr>
+    <tr>
+      <td>Japanese Yen</td>
+      <td>156.73</td>
+      <td><input type="text" id="yenValue" readonly></td>
+    </tr>
+    <tr>
+      <td>Mexican Peso</td>
+      <td>18.41</td>
+      <td><input type="text" id="mxnValue" readonly></td>
+    </tr>
+    <tr>
+      <td colspan="2">Enter Amount of U.S. Dollars</td>
+      <td><input type="text" id="usdInput" oninput="convertCurrency()"></td>
+    </tr>
+  </table>
+
+  <p>
+    <a href="hw2.html">Back to Homework 2 Main Page</a><br>
+    <a href="hw2_part1.html">Go to Part 1</a><br>
+    <a href="hw2_part2.html">Go to Part 2</a>
+  </p>
+
+  <script>
+    const rates = {
+      euro: 0.92,
+      cad: 1.38,
+      hkd: 7.81,
+      yen: 156.73,
+      mxn: 18.41
+    };
+
+    function convertCurrency() {
+      const usd = parseFloat(document.getElementById("usdInput").value);
+
+      if (isNaN(usd)) {
+        document.getElementById("euroValue").value = "";
+        document.getElementById("cadValue").value = "";
+        document.getElementById("hkdValue").value = "";
+        document.getElementById("yenValue").value = "";
+        document.getElementById("mxnValue").value = "";
+        return;
+      }
+
+      document.getElementById("euroValue").value = (usd * rates.euro).toFixed(2);
+      document.getElementById("cadValue").value = (usd * rates.cad).toFixed(2);
+      document.getElementById("hkdValue").value = (usd * rates.hkd).toFixed(2);
+      document.getElementById("yenValue").value = (usd * rates.yen).toFixed(2);
+      document.getElementById("mxnValue").value = (usd * rates.mxn).toFixed(2);
+    }
+  </script>
+</body>
+</html>

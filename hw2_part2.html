@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Homework 2 Part 2 - Form to calculate sum, average, product, min, max.">
+  <title>HW2 Part 2</title>
+</head>
+<body>
+  <h2>Homework 2: Part 2 ~ Process Integers</h2>
+
+  <form id="calcForm">
+    <label>First Number: <input type="text" id="num1"></label><br>
+    <label>Second Number: <input type="text" id="num2"></label><br>
+    <label>Third Number: <input type="text" id="num3"></label><br><br>
+
+    <button type="button" onclick="process()">Process</button>
+    <button type="reset">Clear</button>
+  </form>
+
+  <h3>Results:</h3>
+  <textarea id="results" rows="6" cols="30" readonly></textarea>
+
+  <p>
+    <a href="hw2.html">Back to Homework 2 Main Page</a><br>
+    <a href="hw2_part1.html">Go to Part 1</a><br>
+    <a href="hw2_extra.html">Go to Extra Credit</a>
+  </p>
+
+  <script>
+    function process() {
+      let n1 = parseFloat(document.getElementById("num1").value);
+      let n2 = parseFloat(document.getElementById("num2").value);
+      let n3 = parseFloat(document.getElementById("num3").value);
+
+      if (isNaN(n1) || isNaN(n2) || isNaN(n3)) {
+        document.getElementById("results").value = "Error: Enter valid numbers only.";
+      } else {
+        let sum = n1 + n2 + n3;
+        let avg = (sum / 3).toFixed(2);
+        let product = n1 * n2 * n3;
+        let smallest = Math.min(n1, n2, n3);
+        let largest = Math.max(n1, n2, n3);
+
+        document.getElementById("results").value = 
+          `Sum: ${sum}
+Average: ${avg}
+Product: ${product}
+Smallest: ${smallest}
+Largest: ${largest}`;
+      }
+    }
+  </script>
+</body>
+</html>
