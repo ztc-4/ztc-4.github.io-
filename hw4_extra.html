@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW4 Extra Credit: Hollow Square</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    input[type="number"] {
+      width: 50px;
+      text-align: center;
+    }
+    button {
+      margin: 5px;
+    }
+    #result {
+      margin-top: 15px;
+      font-family: "Courier New", monospace;
+      white-space: pre;
+    }
+    #result.error {
+      font-weight: bold;
+      font-style: italic;
+      font-family: Garamond, serif;
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 4: Extra Credit ~ Hollow Square</h2>
+  
+  <form id="squareForm">
+    Enter a number (2-10): <input type="number" id="size" min="2" max="10">
+    <button type="button" onclick="drawSquare()">Process</button>
+    <button type="reset" onclick="clearResult()">Clear</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function drawSquare() {
+      const size = parseInt(document.getElementById("size").value);
+      const resultDiv = document.getElementById("result");
+      resultDiv.classList.remove("error");
+      
+      if (isNaN(size) || size < 2 || size > 10) {
+        resultDiv.textContent = "Please enter a valid number between 2 and 10.";
+        resultDiv.classList.add("error");
+        return;
+      }
+
+      let square = "";
+
+      for (let row = 1; row <= size; row++) {
+        let line = "";
+        for (let col = 1; col <= size; col++) {
+          if (row === 1 || row === size || col === 1 || col === size) {
+            line += "* ";
+          } else {
+            line += "  ";
+          }
+        }
+        square += line.trimEnd() + "\n";
+      }
+
+      resultDiv.textContent = square;
+    }
+
+    function clearResult() {
+      document.getElementById("result").textContent = "";
+    }
+  </script>
+
+  <p>
+    <a href="hw4.html">Back to Homework 4 Main Page</a><br>
+    <a href="hw4_part1.html">Go to Part 1</a><br>
+    <a href="hw4_part2.html">Go to Part 2</a>
+  </p>
+</body>
+</html>

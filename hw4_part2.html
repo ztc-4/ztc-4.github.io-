@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW3 - Part 2: Multiplication Tables</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      width: 200px;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 5px 10px;
+      text-align: right;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+    }
+    tr:nth-child(even) td {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 4: Part 2 ~ Multiplication Tables</h2>
+  <h3>Learn Multiplication!</h3>
+
+  <div id="tablesContainer"></div>
+
+  <script>
+    const container = document.getElementById("tablesContainer");
+
+    // Outer loop: multipliers 5 to 9
+    for (let multiplier = 5; multiplier <= 9; multiplier++) {
+      // Create table
+      const table = document.createElement("table");
+
+      // Header row
+      const header = table.insertRow();
+      ["Number", "Multiplier", "Result"].forEach(text => {
+        const th = document.createElement("th");
+        th.textContent = text;
+        header.appendChild(th);
+      });
+
+      // Inner loop: numbers 1 to 9
+      for (let num = 1; num <= 9; num++) {
+        const row = table.insertRow();
+        row.insertCell().textContent = num;
+        row.insertCell().textContent = multiplier;
+        row.insertCell().textContent = num * multiplier;
+      }
+
+      container.appendChild(table);
+    }
+  </script>
+
+  <p>
+    <a href="hw4.html">Back to Homework 4 Main Page</a><br>
+    <a href="hw4_part1.html">Go to Part 1</a><br>
+    <a href="hw4_extra.html">Go to Extra Credit</a>
+  </p>
+</body>
+</html>

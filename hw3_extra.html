@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW3 Extra Credit - Multiplication Game</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    #message {
+      margin-top: 15px;
+      font-weight: bold;
+      font-style: italic;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 3: Extra Credit ~ Multiplication Game</h2>
+  <p>Solve the multiplication problem below:</p>
+
+  <p id="question"></p>
+  <input type="number" id="answerInput">
+  <button onclick="checkAnswer()">Submit</button>
+
+  <div id="message"></div>
+
+  <div id="playAgain" style="display:none;">
+    <p>Do you want to keep playing?</p>
+    <button onclick="nextQuestion()">YES</button>
+    <button onclick="endGame()">NO</button>
+  </div>
+
+  <script>
+    let num1, num2;
+
+    function generateQuestion() {
+      num1 = Math.floor(Math.random() * 10);
+      num2 = Math.floor(Math.random() * 10);
+      document.getElementById("question").textContent = `What is ${num1} times ${num2}?`;
+      document.getElementById("answerInput").value = "";
+      document.getElementById("answerInput").focus();
+      document.getElementById("message").textContent = "";
+      document.getElementById("playAgain").style.display = "none";
+    }
+
+    function checkAnswer() {
+      const answer = parseInt(document.getElementById("answerInput").value);
+      if (answer === num1 * num2) {
+        document.getElementById("message").textContent = "Very good!";
+        document.getElementById("playAgain").style.display = "block";
+      } else {
+        document.getElementById("message").textContent = "No. Please try again.";
+      }
+    }
+
+    function nextQuestion() {
+      generateQuestion();
+    }
+
+    function endGame() {
+      document.getElementById("message").textContent = "Thanks for playing, see you next time!";
+      document.getElementById("playAgain").style.display = "none";
+      document.getElementById("question").textContent = "";
+      document.getElementById("answerInput").style.display = "none";      // hide input box
+      document.querySelector("button[onclick='checkAnswer()']").style.display = "none"; // hide submit button
+    }
+    // generate first question when page loads
+    generateQuestion();
+  </script>
+
+  <p>
+    <a href="hw3.html">Back to Homework 3 Main Page</a><br>
+    <a href="hw3_part1.html">Go to Part 1</a><br>
+    <a href="hw3_part2.html">Go to Part 2</a>
+  </p>
+</body>
+</html>

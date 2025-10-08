@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW4 - Part 1: Loops</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    p {
+      margin: 10px 0;
+    }
+    .results {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 4: Part 1 ~ Product & Sum Loops</h2>
+
+  <div class="results" id="forResults"></div>
+  <div class="results" id="whileResults"></div>
+
+  <p>
+    <a href="hw4.html">Back to Homework 4 Main Page</a><br>
+    <a href="hw4_part2.html">Go to Part 2</a><br>
+    <a href="hw4_extra.html">Go to Extra Credit</a>
+  </p>
+
+  <script>
+    // Using for loop: every fourth integer from 5 to 25
+    let forNumbers = [];
+    for (let i = 5; i <= 25; i += 4) {
+      forNumbers.push(i);
+    }
+
+    const forSum = forNumbers.reduce((a, b) => a + b, 0);
+    const forProduct = forNumbers.reduce((a, b) => a * b, 1);
+
+    document.getElementById("forResults").innerHTML = 
+      `The result of ${forNumbers.join(" * ")} is ${forProduct.toLocaleString()}<br>` +
+      `The result of ${forNumbers.join(" + ")} is ${forSum.toLocaleString()}`;
+
+    // Using while loop: every third integer from 3 to 18
+    let whileNumbers = [];
+    let n = 3;
+    while (n <= 18) {
+      whileNumbers.push(n);
+      n += 3;
+    }
+
+    const whileSum = whileNumbers.reduce((a, b) => a + b, 0);
+    const whileProduct = whileNumbers.reduce((a, b) => a * b, 1);
+
+    document.getElementById("whileResults").innerHTML = 
+      `The result of ${whileNumbers.join(" * ")} is ${whileProduct.toLocaleString()}<br>` +
+      `The result of ${whileNumbers.join(" + ")} is ${whileSum.toLocaleString()}`;
+  </script>
+</body>
+</html>

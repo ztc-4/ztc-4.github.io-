@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW3 - Part 1: Student Grades</title>
+  <style>
+    #result {
+      display: block;
+      width: 300px;
+      height: 100px;
+      margin-bottom: 20px;
+
+    .buttons {
+      margin-top: 10px;     
+    }
+
+    .buttons button {
+      display: inline-block;
+      margin-right: 10px;  
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 3: Part 1 ~ Student Grades Calculator</h2>
+
+  <form id="gradeForm">
+    <label>Homework Average: <input type="number" id="hwAvg"></label><br>
+    <label>Mid-Term Exam Score: <input type="number" id="midExam"></label><br>
+    <label>Final Exam Score: <input type="number" id="finalExam"></label><br>
+    <label>Participation: <input type="number" id="participation"></label><br><br>
+
+    <textarea id="result" readonly></textarea>
+
+  <div class="buttons">
+    <button type="button" onclick="calculateGrade()">Calculate</button>
+    <button type="reset">Clear</button>
+  </div>
+  </form>
+
+  <p>
+    <a href="hw3.html">Back to Homework 3 Main Page</a><br>
+    <a href="hw3_part2.html">Go to Part 2</a><br>
+    <a href="hw3_extra.html">Go to Extra Credit</a>
+  </p>
+
+  <script>
+    function calculateGrade() {
+      const hw = parseFloat(document.getElementById("hwAvg").value);
+      const mid = parseFloat(document.getElementById("midExam").value);
+      const finalExam = parseFloat(document.getElementById("finalExam").value);
+      const part = parseFloat(document.getElementById("participation").value);
+      const output = document.getElementById("result");
+
+      if (
+        [hw, mid, finalExam, part].some(isNaN) ||
+        hw < 0 || hw > 100 ||
+        mid < 0 || mid > 100 ||
+        finalExam < 0 || finalExam > 100 ||
+        part < 0 || part > 100
+      ) {
+        output.value = "Please enter valid numbers between 0 and 100.";
+        return;
+      }
+
+      const finalAvg = Math.round((0.5 * hw) + (0.2 * mid) + (0.2 * finalExam) + (0.1 * part));
+      let grade;
+   
+      if (finalAvg >= 90 && finalAvg <= 100) {
+        grade = "A";
+      } else if (finalAvg >= 80 && finalAvg < 90) {
+        grade = "B";
+      } else if (finalAvg >= 70 && finalAvg < 80) {
+        grade = "C";
+      } else if (finalAvg >= 60 && finalAvg < 70) {
+        grade = "D";
+      } else {
+        grade = "F";
+      }
+
+      let message = `Final Average: ${finalAvg}\nLetter Grade: ${grade}`;
+      if (grade === "D" || grade === "F") message += "\nStudent must retake the course.";
+
+      output.value = message;
+    }
+  </script>
+</body>
+</html>

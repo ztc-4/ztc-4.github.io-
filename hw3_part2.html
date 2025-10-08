@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW3 - Part 2: Sales Commission</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin-bottom: 15px;
+    }
+
+    th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    input[type="number"],
+    input[readonly] {
+      width: 100%;
+      box-sizing: border-box;
+      text-align: right;
+    }
+
+    .summary-label {
+      text-align: left;
+      font-weight: bold;
+      background-color: #f9f9f9;
+    }
+
+    .summary-input {
+      text-align: right;
+      background-color: #fff;
+    }
+
+    button {
+      margin-right: 10px;
+    }
+
+    #error {
+      font-weight: bold;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h2>Homework 3: Part 2 ~ Sales Commission Calculator</h2>
+  <p class="instructions">For each item, type the quantity sold by the seller.</p>
+
+  <table>
+    <tr><th>Item #</th><th>Price</th><th>Quantity Sold</th><th>Total</th></tr>
+    <tr><td>1</td><td>20.99</td><td><input type="number" id="item1" min="0"></td><td><input id="total1" readonly></td></tr>
+    <tr><td>2</td><td>12.75</td><td><input type="number" id="item2" min="0"></td><td><input id="total2" readonly></td></tr>
+    <tr><td>3</td><td>9.95</td><td><input type="number" id="item3" min="0"></td><td><input id="total3" readonly></td></tr>
+    <tr><td>4</td><td>35.89</td><td><input type="number" id="item4" min="0"></td><td><input id="total4" readonly></td></tr>
+    <tr><th colspan="3">Total Amount Sold ($)</th><td><input id="totalSold" readonly></td></tr>
+    <tr><th colspan="3">Total Weekly Earnings ($)</th><td><input id="weeklyEarnings" readonly></td></tr>
+  </table>
+
+  <button onclick="calculateSales()">Calculate</button>
+  <button onclick="clearAll()">Clear</button>
+
+  <p id="error"></p>
+
+  <p>
+    <a href="hw3.html">Back to Homework 3 Main Page</a><br>
+    <a href="hw3_part1.html">Go to Part 1</a><br>
+    <a href="hw3_extra.html">Go to Extra Credit</a>
+  </p>
+
+  <script>
+    function calculateSales() {
+      const prices = [20.99, 12.75, 9.95, 35.89];
+      const quantities = [
+        parseFloat(document.getElementById("item1").value),
+        parseFloat(document.getElementById("item2").value),
+        parseFloat(document.getElementById("item3").value),
+        parseFloat(document.getElementById("item4").value)
+      ];
+
+      const error = document.getElementById("error");
+      error.textContent = "";
+
+      if (quantities.some(q => isNaN(q) || q < 0)) {
+        error.textContent = "Please enter valid non-negative numbers for all items.";
+        return;
+      }
+
+      let totals = quantities.map((q, i) => q * prices[i]);
+      totals.forEach((t, i) => document.getElementById(`total${i+1}`).value = t.toFixed(2));
+
+      const totalSold = totals.reduce((a, b) => a + b, 0);
+      document.getElementById("totalSold").value = totalSold.toFixed(2);
+
+      const weeklyEarnings = 250 + (0.09 * totalSold);
+      document.getElementById("weeklyEarnings").value = weeklyEarnings.toFixed(2);
+    }
+
+    function clearAll() {
+      document.querySelectorAll("input").forEach(i => i.value = "");
+      document.getElementById("error").textContent = "";
+    }
+  </script>
+</body>
+</html>
