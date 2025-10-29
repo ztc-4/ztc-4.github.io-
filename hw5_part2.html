@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW5 - Part 2: State Census Lookup</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    textarea, .output {
+      width: 100%;
+      margin-top: 10px;
+      font-weight: bold;
+      font-style: italic;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <h1>Homework 5: Part 2 ~ State Census Lookup</h1>
+
+  <form id="stateForm">
+    <label>Enter a State Name or Abbreviation:</label><br>
+    <input type="text" id="stateInput"><br><br>
+
+    <button type="button" onclick="getStateInfo()">Submit</button>
+    <button type="reset">Clear</button>
+
+    <div id="result" class="output"></div>
+  </form>
+
+  <p>
+    <a href="hw5.html">Back to Homework 5 Main Page</a><br>
+    <a href="hw5_part1.html">Go to Part 1</a><br>
+  </p>
+
+  <script>
+    const states = [
+      ["AL", "Alabama", "Montgomery", "5, 157, 699"],
+      ["AK", "Alaska", "Juneau", "740, 133"],
+      ["AZ", "Arizona", "Phoenix", "7, 582, 384"],
+      ["AR", "Arkansas", "Little Rock", "3, 088, 354"],
+      ["CA", "California", "Sacramento", "39, 431, 263"],
+      ["CO", "Colorado", "Denver", "5, 957, 493"]
+    ];
+
+    function getStateInfo() {
+      const input = document.getElementById("stateInput").value.trim().toLowerCase();
+      const result = document.getElementById("result");
+
+      if (!input) {
+        result.style.color = "red";
+        result.textContent = "Please enter a state name or abbreviation.";
+        return;
+      }
+
+      const found = states.find(
+        s => s[0].toLowerCase() === input || s[1].toLowerCase() === input
+      );
+
+      if (found) {
+        result.innerHTML = `
+          Thanks for your inquiry, here is the information you requested:
+          State abbr = ${found[0]}
+          State Name = ${found[1]}
+          Capital = ${found[2]}
+          Population = ${found[3]}
+        `;
+      } else {
+        const available = states.map(s => s[1]).join(", ");
+        result.textContent = 
+          "Sorry, we do not have information about that state!\n" +
+          "We only have information about: " + available;
+      }
+    }
+  </script>
+</body>
+</html>
