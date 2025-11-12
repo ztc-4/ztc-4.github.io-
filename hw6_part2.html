@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW6 - Part 2: Character Search</title>
+   <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    textarea, .output {
+      width: 100%;
+      margin-top: 10px;
+      font-weight: bold;
+      font-style: italic;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Homework 6: Part 2 ~ Character Search</h1>
+
+  <form id="charForm">
+    <label for="longText">Enter your long text:</label><br>
+    <textarea id="longText" rows="5" cols="40"></textarea><br><br>
+
+    <label for="charInput">Enter one character to search for:</label><br>
+    <input type="text" id="charInput" maxlength="1"><br><br>
+
+    <button type="button" onclick="searchCharacter()">Search</button>
+    <button type="button" onclick="clearSearch()">Clear</button>
+  </form>
+
+  <div id="searchResult" class="output"></div>
+
+ <p>
+    <a href="hw6.html">Back to Homework 6 Main Page</a><br>
+    <a href="hw6_part1.html">Go to Part 1</a><br>
+  </p>
+
+<script>
+  function searchCharacter() {
+    const text = document.getElementById("longText").value;
+    const char = document.getElementById("charInput").value;
+    const result = document.getElementById("searchResult");
+
+    if (!char) {
+      result.innerHTML = "Please enter one character to search for.";
+      return;
+    }
+
+    const regex = new RegExp(char, "gi");
+    const matches = text.match(regex);
+    const count = matches ? matches.length : 0;
+
+    if (count > 0) {
+      result.innerHTML = `The character "${char}" appears ${count} time(s) in the content.`;
+    } else {
+      result.innerHTML = "";
+      const popup = window.open("", "popup", "width=300,height=100,top=200,left=650");
+      popup.document.write(
+        `<p style='font-family:Garamond,serif;'>Search character "${char}" not found in the content you typed.</p>
+         <button onclick="window.close()">Close</button>`
+      );
+    }
+  }
+
+  function clearSearch() {
+    document.getElementById("longText").value = "";
+    document.getElementById("charInput").value = "";
+    document.getElementById("searchResult").innerHTML = "";
+  }
+</script>
+
+</body>
+</html>

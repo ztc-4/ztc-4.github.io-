@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW6 - Part 1: Math Object</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    .output {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-style: italic;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Homework 6: Part 1 ~ Math Object</h1>
+
+  <form id="mathForm">
+    <label for="numInput">Enter a number with at least 4 decimal places:</label><br>
+    <input type="text" id="numInput"><br><br>
+
+    <button type="button" onclick="calculateMath()">Calculate</button>
+    <button type="button" onclick="clearMath()">Clear</button>
+  </form>
+
+  <div id="mathResult" class="output"></div>
+
+  <p>
+    <a href="hw6.html">Back to Homework 6 Main Page</a><br>
+    <a href="hw6_part2.html">Go to Part 2</a><br>
+  </p>
+
+  <script>
+    function calculateMath() {
+      const input = document.getElementById("numInput").value.trim();
+      const result = document.getElementById("mathResult");
+      const num = parseFloat(input);
+
+      if (isNaN(num) || !input.match(/^-?\d+\.\d{4,}$/)) {
+        result.innerHTML = "You need to type a number with at least 4 decimal places, please try again.";
+        return;
+      }
+
+      const roundedInt = Math.round(num);
+      const sqrtRounded = Math.round(Math.sqrt(num));
+      const tenth = num.toFixed(1);
+      const hundredth = num.toFixed(2);
+      const thousandth = num.toFixed(3);
+
+      result.innerHTML =
+        `Your number: ${num}<br>` +
+        `Rounded to the nearest integer = ${roundedInt}<br>` +
+        `Square root rounded to integer = ${sqrtRounded}<br>` +
+        `Rounded to the nearest 10th position = ${tenth}<br>` +
+        `Rounded to the nearest 100th position = ${hundredth}<br>` +
+        `Rounded to the nearest 1000th position = ${thousandth}`;
+    }
+
+    function clearMath() {
+      document.getElementById("numInput").value = "";
+      document.getElementById("mathResult").innerHTML = "";
+    }
+  </script>
+
+</body>
+</html>
