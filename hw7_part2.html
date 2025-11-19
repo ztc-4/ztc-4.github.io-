@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW7 - Part 2: Cookies</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    form {
+      max-width: 400px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    #message {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body onload="checkCookies()">
+
+  <h1>Homework 7: Part 2 ~ Name & Username Cookies</h1>
+
+  <div id="content" class="box"></div>
+
+ <p>
+    <a href="hw7.html">Back to Homework 7 Main Page</a><br>
+    <a href="hw7_part1.html">Go to Part 1</a><br>
+  </p>
+
+  <script>
+  function setSessionCookie(name, value) {
+    document.cookie = `${name}=${value}; path=/`;
+  }
+
+  function getCookie(name) {
+    let match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    return match ? match[2] : null;
+  }
+
+  function checkCookies() {
+    const name = getCookie("realname");
+    const username = getCookie("username");
+    const content = document.getElementById("content");
+
+  if (!name || !username) {
+    content.innerHTML = `
+      <h2>Enter Your Information</h2>
+      <label for="nameInput">Your Name:</label>
+      <input type="text" id="nameInput">
+
+      <label for="userInput">Your Username:</label>
+      <input type="text" id="userInput">
+
+      <button onclick="saveInfo()">Save</button>
+    `;
+  } else {
+    content.innerHTML = `
+      <h2>Welcome back, ${name}!</h2>
+      <p>Your username is: <strong>${username}</strong></p>
+    `;
+  }
+}
+
+  function saveInfo() {
+    const name = document.getElementById("nameInput").value.trim();
+    const username = document.getElementById("userInput").value.trim();
+    const content = document.getElementById("content");
+
+    if (!name || !username) {
+      content.innerHTML += `<p style="color:red; margin-top:10px;">Please fill out both fields.</p>`;
+      return;
+    }
+
+    setSessionCookie("realname", name);
+    setSessionCookie("username", username);
+
+    content.innerHTML = `
+      <p>Thank you! Your information has been saved.</p>
+      <p>You may refresh or return to this page to see your welcome message.</p>
+    `;
+  }
+  </script>
+
+  </body>
+  </html>

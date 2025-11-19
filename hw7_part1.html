@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HW7 - Part 1: Styles</title>
+  <style>
+    body {
+      font-family: Garamond, serif;
+      margin: 40px;
+    }
+    main {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 20px;
+    }
+    form {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Homework 7: Part 1 ~ Styles</h1>
+
+<main id="styleArea" style="padding: 1rem; border: 1px solid #ccc;">
+    <p>
+        When I was younger, my weekends were always spent wandering around the flea market with my cousins. 
+        We’d walk through the crowded lanes, stopping at every table with old books, mismatched dishes, 
+        or strange objects that looked like they had lived a thousand lives before ending up there.
+    </p>
+    <p>
+        One time, we found a tiny wooden chest carved with stars and vines. 
+        The man selling it didn’t know where it came from, but he told us his grandmother used to hide small 
+        treasures inside it. We bought it with the few dollars we had and spent the rest of the day imagining 
+        what secrets it might have held.
+    </p>
+    <p>
+        Even now, whenever I come across something second-hand, I think about that old chest and the stories 
+        we invented for it. It made me realize that sometimes the best things aren’t shiny or new. 
+        They’re the things with a little mystery, a little wear, and a lot of character.
+    </p>
+</main>
+
+
+  <form id="styleForm">
+     
+    <h3>Background Color:</h3>
+    <label><input type="radio" name="bgColor" value="teal"> Teal</label>
+    <label><input type="radio" name="bgColor" value="#4b0082"> Dark Purple</label>
+    <label><input type="radio" name="bgColor" value="#d6b3ff"> Light Purple</label>
+    <label><input type="radio" name="bgColor" value="yellow"> Yellow</label>
+
+    <h3>Text Styles:</h3>
+    <label><input type="checkbox" id="boldCheck"> Bold</label>
+    <label><input type="checkbox" id="italicCheck"> Italic</label>
+    <label><input type="checkbox" id="underlineCheck"> Underline</label>
+
+    <h3>Font Size:</h3>
+    <select id="fontSizeSelect">
+        <option value="">Select size...</option>
+        <option value="90%">Small</option>
+        <option value="110%">Medium</option>
+        <option value="130%">Large</option>
+      </select>
+
+</form>
+
+
+  <p>
+    <a href="hw7.html">Back to Homework 7 Main Page</a><br>
+    <a href="hw7_part2.html">Go to Part 2</a><br>
+  </p>
+
+  <script>
+    const area = document.getElementById("styleArea");
+
+    document.querySelectorAll("input[name='bgColor']").forEach(radio => {
+      radio.addEventListener("change", function() {
+        area.style.backgroundColor = this.value;
+      });
+    });
+
+    document.getElementById("boldCheck").addEventListener("change", function() {
+      area.style.fontWeight = this.checked ? "bold" : "normal";
+    });
+
+    document.getElementById("italicCheck").addEventListener("change", function() {
+      area.style.fontStyle = this.checked ? "italic" : "normal";
+    });
+
+    document.getElementById("underlineCheck").addEventListener("change", function() {
+      area.style.textDecoration = this.checked ? "underline" : "none";
+    });
+
+    document.getElementById("fontSizeSelect").addEventListener("change", function() {
+      area.style.fontSize = this.value;
+    });
+  </script>
+
+</body>
+</html>
